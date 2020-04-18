@@ -1,0 +1,30 @@
+{
+  "name": "veil",
+  "version": "1.0.0",
+  "description": "ASWWU Mask + Tinder",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/PlasmaIntec/ASWWU-Veil.git"
+  },
+  "keywords": [
+    "social",
+    "networking",
+    "matchmaking",
+    "connection"
+  ],
+  "author": "PlasmaIntec",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PlasmaIntec/ASWWU-Veil/issues"
+  },
+  "homepage": "https://github.com/PlasmaIntec/ASWWU-Veil#readme",
+  "dependencies": {
+    "aws-sdk": "^2.658.0",
+    "axios": "^0.19.2",
+    "uuid": "^7.0.3"
+  }
+}
