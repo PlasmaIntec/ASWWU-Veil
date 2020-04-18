@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -7,9 +7,14 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import StarIcon from '@material-ui/icons/Star';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
+import SentimentSatisfiedAltTwoToneIcon from '@material-ui/icons/SentimentSatisfiedAltTwoTone';
 import SentimentSatisfiedAltIcon from '@material-ui/icons/SentimentSatisfiedAlt';
+
+import { createRelationship, getRelationships } from "./neo4jApi";
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import yellow from '@material-ui/core/colors/yellow';
@@ -49,9 +54,26 @@ export default function MediaCard(props) {
 	const username = props.profile.username;
 	const url = props.profile.url;
 
+	const [relationships, setRelationships] = useState(new Set())
+
+	const yourUsername = "" // replace with your profile name
+
+	const updateRelationships = () => {
+		var isMounted = true; // https://www.debuggr.io/react-update-unmounted-component/
+		getRelationships(yourUsername, username)
+			.then((newRelationships) => {
+				if (isMounted) setRelationships(newRelationships)
+			})
+		return () => isMounted = false;
+	}
+
 	const clickButton = (disposition) => {
+		createRelationship(yourUsername, disposition, username)
+			.then(updateRelationships)
 		console.log(`YOU ${disposition} ${username}!`)
 	}
+
+	useEffect(updateRelationships)
   
 	return (
 		<ThemeProvider theme={theme} >
@@ -70,13 +92,25 @@ export default function MediaCard(props) {
 				</CardActionArea>
 				<CardActions className={classes.actions}>
 				<Button size="large" color="primary" onClick={() => clickButton("like")}>
-					<FavoriteBorderIcon />
+					{
+						relationships.has("LIKE") ? 
+						<FavoriteIcon /> :
+						<FavoriteBorderIcon />
+					}
 				</Button>
 				<Button size="large" style={{ color: yellow[500] }} onClick={() => clickButton("superlike")}>
-					<StarBorderIcon />
+					{
+						relationships.has("SUPERLIKE") ? 
+						<StarIcon /> :
+						<StarBorderIcon />
+					}
 				</Button>
 				<Button size="large" color="secondary" onClick={() => clickButton("smile")}>
-					<SentimentSatisfiedAltIcon />
+					{
+						relationships.has("SMILE") ? 
+						<SentimentSatisfiedAltTwoToneIcon /> :
+						<SentimentSatisfiedAltIcon />
+					}
 				</Button>
 				</CardActions>
 			</Card>

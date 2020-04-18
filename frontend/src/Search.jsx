@@ -1,6 +1,6 @@
 import React from "react";
 import "./Search.css";
-import search from "./neo4jApi";
+import { searchProfiles } from "./neo4jApi";
 import ProfileGrid from "./ProfileGrid.jsx"
 
 class Search extends React.Component {
@@ -22,7 +22,7 @@ class Search extends React.Component {
 
 	search() {
 		var query = this.state.query;
-		search(query)
+		searchProfiles(query)
 			.then(profiles => this.setState({ profiles }, () => console.log(this.state.profiles)))
 	}
   

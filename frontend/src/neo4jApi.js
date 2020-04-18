@@ -1,7 +1,7 @@
 import neo4j from "neo4j-driver";
 
 const loggingConfig = {logging: neo4j.logging.console('debug')}; // DEBUG
-var driver = neo4j.driver("bolt://localhost", neo4j.auth.basic("neo4j", "neo4j"));
+var driver = neo4j.driver("bolt://localhost", neo4j.auth.basic("neo4j", "neo4j"), loggingConfig);
 
 var searchProfiles = (queryString) => {
 	var session = driver.session();
