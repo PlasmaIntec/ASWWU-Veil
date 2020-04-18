@@ -1,22 +1,34 @@
 import React from "react";
 import "./Search.css";
+import search from "./neo4jApi";
 
 class Search extends React.Component {
 	constructor(props) {
 		super(props);
 		this.handleSubmit = this.handleSubmit.bind(this);
-		this.input = React.createRef();
+		this.search = this.search.bind(this);
+		this.state = {
+			query: "",
+			profiles: []
+		};
 	}
   
 	handleSubmit(event) {
-		alert('A name was submitted: ' + this.input.current.value);
-		event.preventDefault();
+		this.setState({
+			query: event.target.value
+		}, this.search)
+	}
+
+	search() {
+		var query = this.state.query;
+		search(query)
+			.then(profiles => this.setState({ profiles }, () => console.log(this.state.profiles)))
 	}
   
 	render() {
 		return (
 			<div>
-				<input type="text" className="Search-bar" placeholder="Search..." />
+				<input type="text" className="Search-bar" placeholder="Search..." onChange={this.handleSubmit} />
 			</div>
 		);
 	}
