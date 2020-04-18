@@ -48,6 +48,10 @@ export default function MediaCard(props) {
 	const classes = useStyles();
 	const username = props.profile.username;
 	const url = props.profile.url;
+
+	const clickButton = (disposition) => {
+		console.log(`YOU ${disposition} ${username}!`)
+	}
   
 	return (
 		<ThemeProvider theme={theme} >
@@ -65,13 +69,13 @@ export default function MediaCard(props) {
 				/>
 				</CardActionArea>
 				<CardActions className={classes.actions}>
-				<Button size="large" color="primary">
+				<Button size="large" color="primary" onClick={() => clickButton("like")}>
 					<FavoriteBorderIcon />
 				</Button>
-				<Button size="large" style={{ color: yellow[500] }}>
+				<Button size="large" style={{ color: yellow[500] }} onClick={() => clickButton("superlike")}>
 					<StarBorderIcon />
 				</Button>
-				<Button size="large" color="secondary">
+				<Button size="large" color="secondary" onClick={() => clickButton("smile")}>
 					<SentimentSatisfiedAltIcon />
 				</Button>
 				</CardActions>
