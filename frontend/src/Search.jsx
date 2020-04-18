@@ -1,6 +1,7 @@
 import React from "react";
 import "./Search.css";
 import search from "./neo4jApi";
+import ProfileGrid from "./ProfileGrid.jsx"
 
 class Search extends React.Component {
 	constructor(props) {
@@ -29,6 +30,7 @@ class Search extends React.Component {
 		return (
 			<div>
 				<input type="text" className="Search-bar" placeholder="Search..." onChange={this.handleSubmit} />
+				<ProfileGrid profiles={this.state.profiles} /> 
 			</div>
 		);
 	}
