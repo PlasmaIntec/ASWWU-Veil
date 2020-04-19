@@ -1,6 +1,6 @@
 # ASWWU Veil 👰
 
-## [ASWWU Mask](https://aswwu.com/mask) 🙈 + Tinder 💕
+*[ASWWU Mask](https://aswwu.com/mask) 🙈 + Tinder 💕*
 
 ## ROADMAP 🛣
 
@@ -10,7 +10,7 @@
 * Authentication
 * Quality Of Life
 	* Fuzzy Search
-	* Debounce Search
+	* Debounce Search ✅
 	* UI Alignment
 * Social Media Integration
 	* Notification
