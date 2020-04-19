@@ -14,7 +14,7 @@ import StarBorderIcon from '@material-ui/icons/StarBorder';
 import SentimentSatisfiedAltTwoToneIcon from '@material-ui/icons/SentimentSatisfiedAltTwoTone';
 import SentimentSatisfiedAltIcon from '@material-ui/icons/SentimentSatisfiedAlt';
 
-import { createRelationship, getRelationships } from "./neo4jApi";
+import { createRelationship, getRelationships, deleteRelationships } from "./neo4jApi";
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import yellow from '@material-ui/core/colors/yellow';
@@ -62,15 +62,23 @@ export default function MediaCard(props) {
 		var isMounted = true; // https://www.debuggr.io/react-update-unmounted-component/
 		getRelationships(yourUsername, username)
 			.then((newRelationships) => {
-				if (isMounted) setRelationships(newRelationships)
+				if (isMounted) {
+					setRelationships(newRelationships)
+				}
 			})
 		return () => isMounted = false;
 	}
 
 	const clickButton = (disposition) => {
-		createRelationship(yourUsername, disposition, username)
-			.then(updateRelationships)
-		console.log(`YOU ${disposition} ${username}!`)
+		if (relationships.has(disposition.toUpperCase())) {
+			deleteRelationships(yourUsername, disposition, username)
+				.then(updateRelationships)
+			console.log(`YOU UN${disposition} ${username}!`)
+		} else {
+			createRelationship(yourUsername, disposition, username)
+				.then(updateRelationships)
+			console.log(`YOU ${disposition} ${username}!`)
+		}
 	}
 
 	useEffect(updateRelationships)
