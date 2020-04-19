@@ -2,6 +2,21 @@
 
 *[ASWWU Mask](https://aswwu.com/mask) 🙈 + Tinder 💕*
 
+<<<<<<< HEAD
+## Setup 🖥
+=======
+## Setup
+>>>>>>> 72fa214... Add basic setup instructions to README
+
+Assumes Neo4j is running
+
+```bash
+npm install
+cd frontend
+npm install
+npm start
+```
+
 ## ROADMAP 🛣
 
 * Graph-based queries
