@@ -10,7 +10,7 @@
 * Authentication
 * Quality Of Life
 	* Fuzzy Search
-	* Debounce Search
+	* Debounce Search ✅
 	* UI Alignment
 * Social Media Integration
 	* Notification
