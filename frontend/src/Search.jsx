@@ -2,6 +2,11 @@ import React from "react";
 import "./Search.css";
 import { searchProfiles } from "./neo4jApi";
 import ProfileGrid from "./ProfileGrid.jsx"
+import { Subject, interval } from 'rxjs';
+import { debounce } from 'rxjs/operators';
+
+const sub$ = new Subject();
+const debouncedSub$ = sub$.pipe(debounce(() => interval(200)))
 
 class Search extends React.Component {
 	constructor(props) {
@@ -13,6 +18,13 @@ class Search extends React.Component {
 			profiles: []
 		};
 	}
+
+	componentDidMount() {
+		debouncedSub$.subscribe(query => {
+			searchProfiles(query)
+				.then(profiles => this.setState({ profiles }, () => console.log(this.state.profiles)))
+		})
+	}
   
 	handleSubmit(event) {
 		this.setState({
@@ -22,8 +34,7 @@ class Search extends React.Component {
 
 	search() {
 		var query = this.state.query;
-		searchProfiles(query)
-			.then(profiles => this.setState({ profiles }, () => console.log(this.state.profiles)))
+		debouncedSub$.next(query);
 	}
   
 	render() {
