@@ -15,6 +15,7 @@ npm start
 
 ## ROADMAP 🛣
 
+* Migrate local Neo4j database to cloud-based Neo4j Aura
 * Graph-based queries
 	* Hill-ascent popularity search
 	* Relationship path search
