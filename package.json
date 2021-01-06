@@ -24,7 +24,7 @@
   "homepage": "https://github.com/PlasmaIntec/ASWWU-Veil#readme",
   "dependencies": {
     "aws-sdk": "^2.658.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "neo4j-driver": "^4.0.2",
     "uuid": "^7.0.3"
   }
